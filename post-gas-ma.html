@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+ <title>post-gas-map</title>
+    <style>
+       #map {
+        height: 500px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>西屯區的加油站＆郵局一覽</h3>
+    <div id="map"></div>
+ <script>
+      function initMap() {
+        var fengChia = {lat: 24.179975, lng: 120.648646};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: fengChia,
+		    zoomControl:true,
+			  mapTypeControl: true,
+			scaleControl: true,
+			streetViewControl: true,
+			rotateControl: true,
+			fullscreenControl: true,
+			mapTypeId: 'roadmap'  //hybrid衛星和地圖同時顯示
+          });
+		  
+			var features = [ {
+			position: new google.maps.LatLng(24.183708,120.629850),  //福懋加油站：407台中市西屯區西屯路三段90之28號
+			location: "福懋加油站：407台中市西屯區西屯路三段90之28號",
+			type: 'gas.png'
+		    }, {
+			position: new google.maps.LatLng(24.182368,120.633638),  //全國加油站：407台中市西屯區西屯路三段77之3號
+			location: "全國加油站：407台中市西屯區西屯路三段77之3號",
+			type: 'gas.png'
+		    }, {
+			position: new google.maps.LatLng(24.174949,120.604325),  //台灣中油：407台中市西屯區工業區八路2號
+			location: "台灣中油：407台中市西屯區工業區八路2號",
+			type: 'gas.png'
+		    }, {
+			position: new google.maps.LatLng(24.166191,120.618894),  //台灣中油安和加油站：407台中市西屯區安和路51-8號
+			location: "台灣中油安和加油站：407台中市西屯區安和路51-8號",
+			type: 'gas.png'
+		    }, {
+			position: new google.maps.LatLng(24.162467,120.628174),  //台灣中油安詳站：407台中市西屯區環中路三段800號
+			location: "台灣中油安詳站：407台中市西屯區環中路三段800號",
+			type: 'gas.png'
+		    }, {
+			position: new google.maps.LatLng(24.171329,120.643927),  //台灣中油青海站：407台中市西屯區青海路二段211號
+			location: "台灣中油青海站：407台中市西屯區青海路二段211號",
+			type: 'gas.png'
+		    }, {
+			position: new google.maps.LatLng(24.172093,120.645460),  //台灣中油河南路站：407台中市西屯區河南路二段341號
+			location: "台灣中油河南路站：407台中市西屯區河南路二段341號",
+			type: 'gas.png'
+		    }, {
+			position: new google.maps.LatLng(24.162793,120.650085),  //台灣中油文心站：407台中市西屯區文心路三段2號
+			location: "台灣中油文心站：407台中市西屯區文心路三段2號",
+			type: 'gas.png'
+		    }, {
+			position: new google.maps.LatLng(24.161804,120.650520),  //北基加油站中港站：407台中市西屯區台灣大道二段917號
+			location: "北基加油站中港站：407台中市西屯區台灣大道二段917號",
+			type: 'gas.png'
+		    }, {
+			position: new google.maps.LatLng(24.190475,120.612224),  //台中永安郵局：407台中市西屯區永安里西屯路三段166之80號
+			location: "台中永安郵局：407台中市西屯區永安里西屯路三段166之80號",
+			type: 'post.png'
+			}, {
+			position: new google.maps.LatLng(24.183965,120.604831),  //台中榮總郵局台中52支局：407台中市西屯區台中港路三段160號
+			location: "台中榮總郵局台中52支局：407台中市西屯區台中港路三段160號",
+			type: 'post.png'
+			}, {
+			position: new google.maps.LatLng(24.179032,120.601644),  //東海大學郵局：407台中市西屯區台灣大道四段1727號
+			location: "東海大學郵局：407台中市西屯區台灣大道四段1727號",
+			type: 'post.png'
+			}, {
+			position: new google.maps.LatLng(24.169481,120.606564),  //台中工業區郵局台中46支局：407台中市西屯區工業區六路10號
+			location: "台中工業區郵局台中46支局：407台中市西屯區工業區六路10號",
+			type: 'post.png'
+			},
+		];
+    
+			features.forEach(function(feature) {
+			var icon = {
+			url: "https://raw.githubusercontent.com/fcu-d0342404/WP--HW5/master/" + feature.type,
+			scaledSize: new google.maps.Size(40, 40), // scaled size
+			};
+			var marker = new google.maps.Marker({
+				position: feature.position,
+				icon: icon,
+				map: map
+			});
+			var contentString = feature.location;
+			
+			marker.addListener('mouseover', function() {
+				infowindow.open(map, marker);
+			});
+		
+			marker.addListener('mouseout', function() {
+				infowindow.close(map, marker);
+			});
+			
+			var infowindow = new google.maps.InfoWindow({
+				content: contentString
+			});
+        });
+  
+      }
+   
+    </script>
+    <script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhuPMIP8jQ1E-mtqoro5GzCReViukQM0E&callback=initMap">
+    </script>
+  </body>
+</html>
